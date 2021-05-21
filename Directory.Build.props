@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <Version>1.1.3</Version>
+    <RootNamespace>Byndyusoft.MaskedLogging</RootNamespace>
+    <Authors>Byndyusoft</Authors>
+    <PackageTags>Byndyusoft;MaskedLogging</PackageTags>
+    <RepositoryUrl>https://github.com/Byndyusoft/Byndyusoft.MaskedLogging</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+</Project>
