@@ -20,6 +20,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byndyusoft.MaskedLogging.UnitTests", "tests\Byndyusoft.MaskedLogging.UnitTests\Byndyusoft.MaskedLogging.UnitTests.csproj", "{A2C794A0-5087-4F06-88B3-929DA5C59398}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{0013E690-82EC-442F-B4FD-782CAD4C1BD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{8C294F6B-07F9-4E1D-8BA1-68F692080E39}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\pull-request.yml = .github\workflows\pull-request.yml
+		.github\workflows\push.yml = .github\workflows\push.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +70,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8DD6251B-2EF7-4CBF-BEF2-6EB1822F6FB1} = {7DFADE30-9D91-4D15-AA59-A09749735C09}
 		{A2C794A0-5087-4F06-88B3-929DA5C59398} = {092F3EF0-9D05-4347-A629-9374F65A7998}
+		{8C294F6B-07F9-4E1D-8BA1-68F692080E39} = {0013E690-82EC-442F-B4FD-782CAD4C1BD8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0273047-5443-40B3-9F30-4605C9CAB6F7}
