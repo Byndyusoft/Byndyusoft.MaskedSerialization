@@ -30,17 +30,7 @@ jobs:
       - name: publish
         uses: rohith/publish-nuget@v2
         with:
-          PROJECT_FILE_PATH: src/ModelResult/Byndyusoft.ModelResult.csproj
-          VERSION_FILE_PATH: Directory.Build.props
-          VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
-          TAG_COMMIT: false
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          INCLUDE_SYMBOLS: true
-        
-      - name: publish
-        uses: rohith/publish-nuget@v2
-        with:
-          PROJECT_FILE_PATH: src/ModelResult.AspNetCore/Byndyusoft.ModelResult.AspNetCore.csproj
+          PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization.Newtonsoft/Byndyusoft.MaskedSerialization.Newtonsoft.csproj
           VERSION_FILE_PATH: Directory.Build.props
           VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
           TAG_COMMIT: false
