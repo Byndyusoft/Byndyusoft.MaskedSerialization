@@ -1,16 +1,16 @@
-# Byndyusoft.MaskedSerialization
+# Byndyusoft.MaskedSerialization.Newtonsoft
 
 Tool for serialization with masking sensitive data
 
 | | | |
 | ------- | ------------ | --------- |
-| [**Byndyusoft.MaskedSerialization**](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization/) | [![Nuget](https://img.shields.io/nuget/v/Byndyusoft.MaskedSerialization.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization/) | [![Downloads](https://img.shields.io/nuget/dt/Byndyusoft.MaskedSerialization.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization/) |
+| [**Byndyusoft.MaskedSerialization.Newtonsoft**](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization.Newtonsoft/) | [![Nuget](https://img.shields.io/nuget/v/Byndyusoft.MaskedSerialization.Newtonsoft.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization.Newtonsoft/) | [![Downloads](https://img.shields.io/nuget/dt/Byndyusoft.MaskedSerialization.Newtonsoft.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization.Newtonsoft/) |
 
 
 ## Installing
 
 ```shell
-dotnet add package Byndyusoft.MaskedSerialization
+dotnet add package Byndyusoft.MaskedSerialization.Newtonsoft
 ```
 
 ## Usage
