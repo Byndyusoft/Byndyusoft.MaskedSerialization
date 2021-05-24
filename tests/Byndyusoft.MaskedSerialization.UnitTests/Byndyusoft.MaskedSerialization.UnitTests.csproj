@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Byndyusoft.MaskedLogging.Newtonsoft\Byndyusoft.MaskedLogging.Newtonsoft.csproj" />
+    <ProjectReference Include="..\..\src\Byndyusoft.MaskedSerialization.Newtonsoft\Byndyusoft.MaskedSerialization.Newtonsoft.csproj" />
   </ItemGroup>
 
 </Project>

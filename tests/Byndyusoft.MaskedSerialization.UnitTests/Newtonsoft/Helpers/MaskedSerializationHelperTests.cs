@@ -1,8 +1,8 @@
-﻿namespace Byndyusoft.MaskedLogging.UnitTests.Newtonsoft.Helpers
+﻿namespace Byndyusoft.MaskedSerialization.UnitTests.Newtonsoft.Helpers
 {
     using AutoFixture;
-    using MaskedLogging.Newtonsoft.Attributes;
-    using MaskedLogging.Newtonsoft.Helpers;
+    using MaskedSerialization.Newtonsoft.Attributes;
+    using MaskedSerialization.Newtonsoft.Helpers;
     using NUnit.Framework;
 
     [TestFixture]

@@ -1,4 +1,4 @@
-﻿namespace Byndyusoft.MaskedLogging.Newtonsoft.Serialization
+﻿namespace Byndyusoft.MaskedSerialization.Newtonsoft.Serialization
 {
     using System.Reflection;
     using Attributes;
