@@ -1,16 +1,16 @@
-# Byndyusoft.MaskedLogging
+# Byndyusoft.MaskedSerialization
 
 Tool for serialization with masking sensitive data
 
 | | | |
 | ------- | ------------ | --------- |
-| [**Byndyusoft.MaskedLogging**](https://www.nuget.org/packages/Byndyusoft.MaskedLogging/) | [![Nuget](https://img.shields.io/nuget/v/Byndyusoft.MaskedLogging.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedLogging/) | [![Downloads](https://img.shields.io/nuget/dt/Byndyusoft.MaskedLogging.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedLogging/) |
+| [**Byndyusoft.MaskedSerialization**](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization/) | [![Nuget](https://img.shields.io/nuget/v/Byndyusoft.MaskedSerialization.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization/) | [![Downloads](https://img.shields.io/nuget/dt/Byndyusoft.MaskedSerialization.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization/) |
 
 
 ## Installing
 
 ```shell
-dotnet add package Byndyusoft.MaskedLogging
+dotnet add package Byndyusoft.MaskedSerialization
 ```
 
 ## Usage

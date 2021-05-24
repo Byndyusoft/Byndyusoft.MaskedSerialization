@@ -1,4 +1,4 @@
-﻿namespace Byndyusoft.MaskedLogging.Newtonsoft.Extensions
+﻿namespace Byndyusoft.MaskedSerialization.Newtonsoft.Extensions
 {
     using global::Newtonsoft.Json;
     using Helpers;

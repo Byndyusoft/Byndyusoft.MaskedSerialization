@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byndyusoft.MaskedLogging.Newtonsoft", "src\Byndyusoft.MaskedLogging.Newtonsoft\Byndyusoft.MaskedLogging.Newtonsoft.csproj", "{8DD6251B-2EF7-4CBF-BEF2-6EB1822F6FB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byndyusoft.MaskedSerialization.Newtonsoft", "src\Byndyusoft.MaskedSerialization.Newtonsoft\Byndyusoft.MaskedSerialization.Newtonsoft.csproj", "{8DD6251B-2EF7-4CBF-BEF2-6EB1822F6FB1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7DFADE30-9D91-4D15-AA59-A09749735C09}"
 EndProject
@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byndyusoft.MaskedLogging.UnitTests", "tests\Byndyusoft.MaskedLogging.UnitTests\Byndyusoft.MaskedLogging.UnitTests.csproj", "{A2C794A0-5087-4F06-88B3-929DA5C59398}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byndyusoft.MaskedSerialization.UnitTests", "tests\Byndyusoft.MaskedSerialization.UnitTests\Byndyusoft.MaskedSerialization.UnitTests.csproj", "{A2C794A0-5087-4F06-88B3-929DA5C59398}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{0013E690-82EC-442F-B4FD-782CAD4C1BD8}"
 EndProject
