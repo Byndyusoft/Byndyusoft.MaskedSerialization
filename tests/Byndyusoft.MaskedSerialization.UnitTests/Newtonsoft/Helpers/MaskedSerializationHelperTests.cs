@@ -1,7 +1,7 @@
 ﻿namespace Byndyusoft.MaskedSerialization.UnitTests.Newtonsoft.Helpers
 {
+    using Annotations;
     using AutoFixture;
-    using MaskedSerialization.Newtonsoft.Attributes;
     using MaskedSerialization.Newtonsoft.Helpers;
     using NUnit.Framework;
 

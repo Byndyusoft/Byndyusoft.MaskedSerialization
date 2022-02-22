@@ -1,7 +1,7 @@
 ﻿namespace Byndyusoft.MaskedSerialization.Newtonsoft.Serialization
 {
     using System.Reflection;
-    using Attributes;
+    using Annotations;
     using global::Newtonsoft.Json;
     using global::Newtonsoft.Json.Serialization;
 
