@@ -6,6 +6,7 @@
     using global::Serilog;
     using global::Serilog.Sinks.TestCorrelator;
     using Infrastructure.Dtos;
+    using MaskedSerialization.Serilog;
     using NUnit.Framework;
 
     [TestFixture]
@@ -17,7 +18,7 @@
             _fixture = new Fixture();
             _dto = _fixture.Create<TestDto>();
 
-            var loggerConfiguration = new LoggerConfiguration().WriteTo.Console().WriteTo.TestCorrelator();
+            var loggerConfiguration = Temp.GetLoggerConfiguration().WriteTo.Console().WriteTo.TestCorrelator();
             _logger = loggerConfiguration.CreateLogger();
         }
 
@@ -52,11 +53,11 @@
 
                     Assert.That(loggedString, Is.EqualTo(
                         "Deconstructed Dto TestDto {" +
-                        $"\"Note\":\"{_dto.Note}\"," +
-                        "\"Password\":\"*\"," +
-                        $"\"Inner\":{{\"Id\":{_dto.Inner.Id},\"Inn\":\"*\", \"$type\": \"TestInnerDto\"}}," +
-                        "\"SecretInner\":\"*\", \"$type\": \"TestDto\"" +
-                        "}"));
+                        $" Note: \"{_dto.Note}\"," +
+                        " Password: \"*\"," +
+                        $" Inner: TestInnerDto {{ Id: {_dto.Inner.Id}, Inn: \"*\" }}," +
+                        " SecretInner: \"*\"" +
+                        " }"));
                 }
             }
         }
