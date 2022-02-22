@@ -1,7 +1,7 @@
 ﻿namespace Byndyusoft.MaskedSerialization.UnitTests.Newtonsoft.Helpers
 {
-    using Annotations;
     using AutoFixture;
+    using Infrastructure.Dtos;
     using MaskedSerialization.Newtonsoft.Helpers;
     using NUnit.Framework;
 
@@ -26,27 +26,6 @@
             var serialized = MaskedSerializationHelper.SerializeWithMasking(dto);
 
             Assert.That(serialized, Is.EqualTo(expected));
-        }
-
-        public class TestDto
-        {
-            public string Note { get; set; } = default!;
-
-            [Masked]
-            public string Password { get; set; } = default!;
-
-            public TestInnerDto Inner { get; set; } = default!;
-
-            [Masked]
-            public TestInnerDto? SecretInner { get; set; } = default!;
-        }
-
-        public class TestInnerDto
-        {
-            public long Id { get; set; }
-
-            [Masked]
-            public long Inn { get; set; }
         }
     }
 }
