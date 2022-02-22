@@ -14,7 +14,7 @@
             var property = base.CreateProperty(member, memberSerialization);
 
             var maskLoggingAttribute = member.GetCustomAttribute<MaskedAttribute>();
-            if (maskLoggingAttribute != null) 
+            if (maskLoggingAttribute != null)
                 property.Converter = MaskConverter;
 
             return property;

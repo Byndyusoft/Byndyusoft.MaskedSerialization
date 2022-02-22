@@ -8,13 +8,13 @@
     [TestFixture]
     public class MaskedSerializationHelperTests
     {
-        private Fixture _fixture = default!;
-
         [SetUp]
         public void SetUp()
         {
             _fixture = new Fixture();
         }
+
+        private Fixture _fixture = default!;
 
         [Test]
         public void SerializeWithMasking_WithInner_SerializedWithMasks()

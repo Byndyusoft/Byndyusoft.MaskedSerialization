@@ -16,12 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Byndyusoft.MaskedSerialization.Newtonsoft\Byndyusoft.MaskedSerialization.Newtonsoft.csproj" />
-    <ProjectReference Include="..\..\src\Byndyusoft.MaskedSerialization.Serilog\Byndyusoft.MaskedSerialization.Serilog.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Serilog\" />
+    <ProjectReference
+      Include="..\..\src\Byndyusoft.MaskedSerialization.Newtonsoft\Byndyusoft.MaskedSerialization.Newtonsoft.csproj" />
+    <ProjectReference
+      Include="..\..\src\Byndyusoft.MaskedSerialization.Serilog\Byndyusoft.MaskedSerialization.Serilog.csproj" />
   </ItemGroup>
 
 </Project>

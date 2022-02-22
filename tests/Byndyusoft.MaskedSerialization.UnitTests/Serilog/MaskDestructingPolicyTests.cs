@@ -6,11 +6,11 @@
     using global::Serilog;
     using global::Serilog.Sinks.TestCorrelator;
     using Infrastructure.Dtos;
-    using MaskedSerialization.Serilog;
+    using MaskedSerialization.Serilog.Extensions;
     using NUnit.Framework;
 
     [TestFixture]
-    public class SampleTests
+    public class MaskDestructingPolicyTests
     {
         [SetUp]
         public void SetUp()
@@ -18,7 +18,7 @@
             _fixture = new Fixture();
             _dto = _fixture.Create<TestDto>();
 
-            var loggerConfiguration = Temp.GetLoggerConfiguration().WriteTo.Console().WriteTo.TestCorrelator();
+            var loggerConfiguration = new LoggerConfiguration().WithMaskingPolicy().WriteTo.Console().WriteTo.TestCorrelator();
             _logger = loggerConfiguration.CreateLogger();
         }
 
@@ -27,7 +27,7 @@
         private ILogger _logger = default!;
 
         [Test]
-        public void Test()
+        public void Log_TestDto_LogDestructuredDataIsMasked()
         {
             using (TestCorrelator.CreateContext())
             {
