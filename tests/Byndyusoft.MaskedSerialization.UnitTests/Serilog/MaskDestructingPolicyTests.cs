@@ -27,7 +27,7 @@
         private ILogger _logger = default!;
 
         [Test]
-        public void Log_TestDto_LogDestructuredDataIsMasked()
+        public void Log_TestDto_LoggedDestructuredDataIsMasked()
         {
             using (TestCorrelator.CreateContext())
             {
