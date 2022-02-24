@@ -1,9 +1,12 @@
 ﻿namespace Byndyusoft.MaskedSerialization.Serilog.Policies
 {
+    using System;
+    using System.Collections.Concurrent;
     using System.Linq;
     using System.Reflection;
     using Annotations.Attributes;
     using Annotations.Consts;
+    using Cache;
     using Core.Extensions;
     using global::Serilog.Core;
     using global::Serilog.Debugging;
@@ -11,6 +14,8 @@
 
     public class MaskDestructuringPolicy : IDestructuringPolicy
     {
+        static readonly ConcurrentDictionary<Type, CacheEntry> Cache = new ConcurrentDictionary<Type, CacheEntry>();
+
         public bool TryDestructure(object value, ILogEventPropertyValueFactory propertyValueFactory, out LogEventPropertyValue? result)
         {
             var type = value.GetType();
@@ -22,23 +27,37 @@
                 return false;
             }
 
-            var propertyInfos = type.GetGetablePropertiesRecursively();
+            var cacheEntry = Cache.GetOrAdd(type, GetCacheEntry);
+
             var logEventProperties =
-                propertyInfos.Select(propertyInfo => CreateLogEventProperty(value, propertyInfo, propertyValueFactory));
+                cacheEntry.Properties.Select(cacheEntryItem => CreateLogEventProperty(value, cacheEntryItem, propertyValueFactory));
 
             result = new StructureValue(logEventProperties, type.Name);
             return true;
         }
 
-        private LogEventProperty CreateLogEventProperty(object value, PropertyInfo propertyInfo,
-            ILogEventPropertyValueFactory propertyValueFactory)
+        private CacheEntry GetCacheEntry(Type type)
+        {
+            var propertyInfos = type.GetGetablePropertiesRecursively().ToArray();
+            var cacheEntryProperties = propertyInfos.Select(GetCacheEntryProperty).ToArray();
+            return new CacheEntry(cacheEntryProperties);
+        }
+
+        private CacheEntryProperty GetCacheEntryProperty(PropertyInfo propertyInfo)
         {
             var maskedAttribute = propertyInfo.GetCustomAttribute<MaskedAttribute>();
-            if (maskedAttribute != null)
-                return new LogEventProperty(propertyInfo.Name, propertyValueFactory.CreatePropertyValue(MaskStrings.Default));
+            var isMasked = maskedAttribute != null;
+            return new CacheEntryProperty(propertyInfo, isMasked);
+        }
 
-            var propertyValue = SafeGetPropertyValue(value, propertyInfo);
-            return new LogEventProperty(propertyInfo.Name, propertyValueFactory.CreatePropertyValue(propertyValue, true));
+        private LogEventProperty CreateLogEventProperty(object value, CacheEntryProperty cacheEntryProperty,
+            ILogEventPropertyValueFactory propertyValueFactory)
+        {
+            if (cacheEntryProperty.IsMasked)
+                return new LogEventProperty(cacheEntryProperty.PropertyInfo.Name, propertyValueFactory.CreatePropertyValue(MaskStrings.Default));
+
+            var propertyValue = SafeGetPropertyValue(value, cacheEntryProperty.PropertyInfo);
+            return new LogEventProperty(cacheEntryProperty.PropertyInfo.Name, propertyValueFactory.CreatePropertyValue(propertyValue, true));
         }
 
         private object SafeGetPropertyValue(object value, PropertyInfo propertyInfo)
