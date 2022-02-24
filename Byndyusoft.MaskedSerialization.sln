@@ -35,7 +35,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Byndyusoft.MaskedSerialization.Serilog", "src\Byndyusoft.MaskedSerialization.Serilog\Byndyusoft.MaskedSerialization.Serilog.csproj", "{BB974B37-C191-4727-8A01-D83D1AB9E1A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byndyusoft.MaskedSerialization.Annotations", "src\Byndyusoft.MaskedSerialization.Annotations\Byndyusoft.MaskedSerialization.Annotations.csproj", "{1F24E940-DEE8-4411-B631-88F744A63520}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Byndyusoft.MaskedSerialization.Annotations", "src\Byndyusoft.MaskedSerialization.Annotations\Byndyusoft.MaskedSerialization.Annotations.csproj", "{1F24E940-DEE8-4411-B631-88F744A63520}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byndyusoft.MaskedSerialization.Core", "src\Byndyusoft.MaskedSerialization.Core\Byndyusoft.MaskedSerialization.Core.csproj", "{9131D45D-96B2-4B02-B3EB-369BB73D3A64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,18 @@ Global
 		{1F24E940-DEE8-4411-B631-88F744A63520}.Release|x64.Build.0 = Release|Any CPU
 		{1F24E940-DEE8-4411-B631-88F744A63520}.Release|x86.ActiveCfg = Release|Any CPU
 		{1F24E940-DEE8-4411-B631-88F744A63520}.Release|x86.Build.0 = Release|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Debug|x64.Build.0 = Debug|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Debug|x86.Build.0 = Debug|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Release|x64.ActiveCfg = Release|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Release|x64.Build.0 = Release|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Release|x86.ActiveCfg = Release|Any CPU
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +119,7 @@ Global
 		{8C294F6B-07F9-4E1D-8BA1-68F692080E39} = {0013E690-82EC-442F-B4FD-782CAD4C1BD8}
 		{BB974B37-C191-4727-8A01-D83D1AB9E1A4} = {7DFADE30-9D91-4D15-AA59-A09749735C09}
 		{1F24E940-DEE8-4411-B631-88F744A63520} = {7DFADE30-9D91-4D15-AA59-A09749735C09}
+		{9131D45D-96B2-4B02-B3EB-369BB73D3A64} = {7DFADE30-9D91-4D15-AA59-A09749735C09}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0273047-5443-40B3-9F30-4605C9CAB6F7}

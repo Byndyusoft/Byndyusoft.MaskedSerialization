@@ -3,7 +3,7 @@
     using System.Linq;
     using System.Reflection;
     using Annotations;
-    using Extensions;
+    using Core.Extensions;
     using global::Serilog.Core;
     using global::Serilog.Debugging;
     using global::Serilog.Events;

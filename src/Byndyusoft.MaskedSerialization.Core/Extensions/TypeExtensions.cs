@@ -1,13 +1,13 @@
-﻿namespace Byndyusoft.MaskedSerialization.Serilog.Extensions
+﻿namespace Byndyusoft.MaskedSerialization.Core.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
 
-    internal static class TypeExtensions
+    public static class TypeExtensions
     {
-        internal static IEnumerable<PropertyInfo> GetGetablePropertiesRecursively(this Type type)
+        public static IEnumerable<PropertyInfo> GetGetablePropertiesRecursively(this Type type)
         {
             var foundPropertyNames = new HashSet<string>();
 

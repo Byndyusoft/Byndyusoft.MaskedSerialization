@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Byndyusoft.MaskedSerialization.Annotations\Byndyusoft.MaskedSerialization.Annotations.csproj" />
+    <ProjectReference Include="..\Byndyusoft.MaskedSerialization.Core\Byndyusoft.MaskedSerialization.Core.csproj" />
   </ItemGroup>
 
 </Project>
