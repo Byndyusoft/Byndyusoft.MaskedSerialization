@@ -1,4 +1,4 @@
-﻿namespace Byndyusoft.MaskedSerialization.Annotations
+﻿namespace Byndyusoft.MaskedSerialization.Annotations.Attributes
 {
     using System;
 
