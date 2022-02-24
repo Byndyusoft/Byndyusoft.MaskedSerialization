@@ -13,6 +13,10 @@
         {
             var property = base.CreateProperty(member, memberSerialization);
 
+            var maskableAttribute = member.DeclaringType?.GetCustomAttribute<MaskableAttribute>();
+            if (maskableAttribute == null)
+                return property;
+
             var maskLoggingAttribute = member.GetCustomAttribute<MaskedAttribute>();
             if (maskLoggingAttribute != null)
                 property.Converter = MaskConverter;

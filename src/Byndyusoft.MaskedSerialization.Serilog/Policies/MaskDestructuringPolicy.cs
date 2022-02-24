@@ -2,7 +2,8 @@
 {
     using System.Linq;
     using System.Reflection;
-    using Annotations;
+    using Annotations.Attributes;
+    using Annotations.Consts;
     using Core.Extensions;
     using global::Serilog.Core;
     using global::Serilog.Debugging;
@@ -10,9 +11,17 @@
 
     public class MaskDestructuringPolicy : IDestructuringPolicy
     {
-        public bool TryDestructure(object value, ILogEventPropertyValueFactory propertyValueFactory, out LogEventPropertyValue result)
+        public bool TryDestructure(object value, ILogEventPropertyValueFactory propertyValueFactory, out LogEventPropertyValue? result)
         {
             var type = value.GetType();
+
+            var maskableAttribute = type.GetCustomAttribute<MaskableAttribute>();
+            if (maskableAttribute == null)
+            {
+                result = null;
+                return false;
+            }
+
             var propertyInfos = type.GetGetablePropertiesRecursively();
             var logEventProperties =
                 propertyInfos.Select(propertyInfo => CreateLogEventProperty(value, propertyInfo, propertyValueFactory));
