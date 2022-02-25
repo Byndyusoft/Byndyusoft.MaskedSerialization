@@ -1,71 +1,45 @@
 ﻿namespace Byndyusoft.MaskedSerialization.Serilog.Policies
 {
-    using System;
-    using System.Collections.Concurrent;
     using System.Linq;
     using System.Reflection;
-    using Annotations.Attributes;
     using Annotations.Consts;
-    using Cache;
-    using Core.Extensions;
+    using Core.MaskingInfo;
     using global::Serilog.Core;
     using global::Serilog.Debugging;
     using global::Serilog.Events;
 
     public class MaskDestructuringPolicy : IDestructuringPolicy
     {
-        static readonly ConcurrentDictionary<Type, CacheEntry> Cache = new ConcurrentDictionary<Type, CacheEntry>();
-
         public bool TryDestructure(object value, ILogEventPropertyValueFactory propertyValueFactory, out LogEventPropertyValue? result)
         {
             var type = value.GetType();
 
-            var cacheEntry = Cache.GetOrAdd(type, GetCacheEntry);
-            if (cacheEntry.IsMaskableType == false)
+            var typeMaskingInfo = TypeMaskingInfoHelper.Get(type);
+            if (typeMaskingInfo.IsMaskable == false)
             {
                 result = null;
                 return false;
             }
 
-            var logEventProperties =
-                cacheEntry.Properties.Select(cacheEntryProperty => CreateLogEventProperty(value, cacheEntryProperty, propertyValueFactory));
+            var logEventProperties = typeMaskingInfo
+                .GetAllProperties()
+                .Select(propertyMaskingInfo => CreateLogEventProperty(value, propertyMaskingInfo, propertyValueFactory));
 
             result = new StructureValue(logEventProperties, type.Name);
             return true;
         }
 
-        private CacheEntry GetCacheEntry(Type type)
-        {
-            var propertyInfos = type.GetGetablePropertiesRecursively().ToArray();
-            var cacheEntryProperties = propertyInfos.Select(GetCacheEntryProperty).ToArray();
-
-            return new CacheEntry(cacheEntryProperties, IsTypeMaskable(type));
-        }
-
-        private CacheEntryProperty GetCacheEntryProperty(PropertyInfo propertyInfo)
-        {
-            var maskedAttribute = propertyInfo.GetCustomAttribute<MaskedAttribute>();
-            var isMasked = maskedAttribute != null;
-            return new CacheEntryProperty(propertyInfo, isMasked);
-        }
-
-        private bool IsTypeMaskable(Type type)
-        {
-            var cacheEntryClass = type.GetCustomAttribute<MaskableAttribute>();
-            return cacheEntryClass != null;
-        }
-
         private LogEventProperty CreateLogEventProperty(
             object value,
-            CacheEntryProperty cacheEntryProperty,
+            PropertyMaskingInfo propertyMaskingInfo,
             ILogEventPropertyValueFactory propertyValueFactory)
         {
-            if (cacheEntryProperty.IsMasked)
-                return new LogEventProperty(cacheEntryProperty.PropertyInfo.Name,
+            if (propertyMaskingInfo.IsMasked)
+                return new LogEventProperty(propertyMaskingInfo.PropertyInfo.Name,
                     propertyValueFactory.CreatePropertyValue(MaskStrings.Default));
 
-            var propertyValue = SafeGetPropertyValue(value, cacheEntryProperty.PropertyInfo);
-            return new LogEventProperty(cacheEntryProperty.PropertyInfo.Name,
+            var propertyValue = SafeGetPropertyValue(value, propertyMaskingInfo.PropertyInfo);
+            return new LogEventProperty(propertyMaskingInfo.PropertyInfo.Name,
                 propertyValueFactory.CreatePropertyValue(propertyValue, true));
         }
 

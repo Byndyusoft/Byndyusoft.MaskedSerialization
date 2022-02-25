@@ -5,4 +5,8 @@
     <nullable>enable</nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Byndyusoft.MaskedSerialization.Annotations\Byndyusoft.MaskedSerialization.Annotations.csproj" />
+  </ItemGroup>
+
 </Project>

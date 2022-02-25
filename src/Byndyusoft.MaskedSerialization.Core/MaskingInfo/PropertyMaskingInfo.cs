@@ -1,10 +1,10 @@
-﻿namespace Byndyusoft.MaskedSerialization.Serilog.Cache
+﻿namespace Byndyusoft.MaskedSerialization.Core.MaskingInfo
 {
     using System.Reflection;
 
-    public class CacheEntryProperty
+    public class PropertyMaskingInfo
     {
-        public CacheEntryProperty(PropertyInfo propertyInfo, bool isMasked)
+        public PropertyMaskingInfo(PropertyInfo propertyInfo, bool isMasked)
         {
             PropertyInfo = propertyInfo;
             IsMasked = isMasked;
