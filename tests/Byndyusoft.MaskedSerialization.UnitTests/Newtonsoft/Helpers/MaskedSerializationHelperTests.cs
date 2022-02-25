@@ -18,7 +18,7 @@
         private Fixture _fixture = default!;
 
         [Test]
-        public void SerializeWithMasking_MaskableWithInner_SerializedWithMasks()
+        public void SerializeWithMasking_HasMaskedPropertiesWithInner_SerializedWithMasks()
         {
             // Arrange
             var dto = _fixture.Create<TestUserDto>();
@@ -34,10 +34,10 @@
         }
 
         [Test]
-        public void SerializeWithMasking_NonMaskable_SerializedWithoutMasks()
+        public void SerializeWithMasking_DoesNotHaveMaskedProperties_SerializedWithoutMasks()
         {
             // Arrange
-            var dto = _fixture.Create<TestNonMaskableDto>();
+            var dto = _fixture.Create<TestWithoutMaskedPropertiesDto>();
             var expected = $"{{\"Note\":\"{dto.Note}\",\"Password\":\"{dto.Password}\"}}";
 
             // Act
@@ -49,10 +49,10 @@
         }
 
         [Test]
-        public void SerializeWithMasking_NonMaskableWithInnerMaskable_SerializedInnerWithMasks()
+        public void SerializeWithMasking_InnerHasMaskedProperties_SerializedInnerWithMasks()
         {
             // Arrange
-            var dto = _fixture.Create<TestNonMaskableUserDto>();
+            var dto = _fixture.Create<TestUserWithoutMaskedPropertiesDto>();
             var expected = $"{{\"Note\":\"{dto.Note}\",\"Company\":{{\"Id\":{dto.Company.Id},\"Inn\":\"*\"}}}}";
 
             // Act

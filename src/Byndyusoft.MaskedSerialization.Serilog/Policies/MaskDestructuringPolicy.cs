@@ -15,7 +15,7 @@
             var type = value.GetType();
 
             var typeMaskingInfo = TypeMaskingInfoHelper.Get(type);
-            if (typeMaskingInfo.IsMaskable == false)
+            if (typeMaskingInfo.HasMaskedProperties == false)
             {
                 result = null;
                 return false;

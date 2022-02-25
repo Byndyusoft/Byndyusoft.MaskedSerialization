@@ -2,7 +2,6 @@
 {
     using Annotations.Attributes;
 
-    [Maskable]
     public class TestCompanyDto
     {
         public long Id { get; set; }

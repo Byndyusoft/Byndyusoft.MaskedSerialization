@@ -52,14 +52,14 @@
             using (TestCorrelator.CreateContext())
             {
                 // Arrange
-                var dto = _fixture.Create<TestNonMaskableDto>();
-                var template = "Deconstructed Dto {@TestNonMaskableDto}";
+                var dto = _fixture.Create<TestWithoutMaskedPropertiesDto>();
+                var template = "Deconstructed Dto {@TestWithoutMaskedPropertiesDto}";
 
                 // Act
                 _logger.Information(template, dto);
 
                 // Assert
-                AssertSingleLoggedString(template, "Deconstructed Dto TestNonMaskableDto {" +
+                AssertSingleLoggedString(template, "Deconstructed Dto TestWithoutMaskedPropertiesDto {" +
                                                    $" Note: \"{dto.Note}\"," +
                                                    $" Password: \"{dto.Password}\"" +
                                                    " }");
@@ -72,14 +72,14 @@
             using (TestCorrelator.CreateContext())
             {
                 // Arrange
-                var dto = _fixture.Create<TestNonMaskableUserDto>();
-                var template = "Deconstructed Dto {@TestNonMaskableUserDto}";
+                var dto = _fixture.Create<TestUserWithoutMaskedPropertiesDto>();
+                var template = "Deconstructed Dto {@TestUserWithoutMaskedPropertiesDto}";
 
                 // Act
                 _logger.Information(template, dto);
 
                 // Assert
-                AssertSingleLoggedString(template, "Deconstructed Dto TestNonMaskableUserDto {" +
+                AssertSingleLoggedString(template, "Deconstructed Dto TestUserWithoutMaskedPropertiesDto {" +
                                                    $" Note: \"{dto.Note}\"," +
                                                    $" Company: TestCompanyDto {{ Id: {dto.Company.Id}, Inn: \"*\" }}" +
                                                    " }");

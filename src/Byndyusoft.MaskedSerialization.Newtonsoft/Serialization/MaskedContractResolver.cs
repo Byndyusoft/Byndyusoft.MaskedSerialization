@@ -18,7 +18,7 @@
                 return property;
 
             var typeMaskingInfo = TypeMaskingInfoHelper.Get(reflectedType);
-            if (typeMaskingInfo.IsMaskable == false)
+            if (typeMaskingInfo.HasMaskedProperties == false)
                 return property;
 
             if (typeMaskingInfo.IsMemberMasked(member))

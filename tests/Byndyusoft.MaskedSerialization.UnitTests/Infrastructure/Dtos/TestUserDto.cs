@@ -2,7 +2,6 @@
 {
     using Annotations.Attributes;
 
-    [Maskable]
     public class TestUserDto
     {
         public string Note { get; set; } = default!;

@@ -19,13 +19,14 @@
             writer.WriteStartObject();
 
             var typeMaskingInfo = TypeMaskingInfoHelper.Get(value.GetType());
-            if (typeMaskingInfo.IsMaskable == false)
-                throw new InvalidOperationException("This converter is used only for maskable types");
+            if (typeMaskingInfo.HasMaskedProperties == false)
+                throw new InvalidOperationException("This converter is used only types with masked properties");
 
             foreach (var propertyMaskingInfo in typeMaskingInfo.GetAllProperties())
             {
                 var propertyInfo = propertyMaskingInfo.PropertyInfo;
-                writer.WritePropertyName(propertyInfo.Name);
+                var propertyInfoName = propertyInfo.Name;
+                writer.WritePropertyName(options.PropertyNamingPolicy?.ConvertName(propertyInfoName) ?? propertyInfoName);
                 if (propertyMaskingInfo.IsMasked)
                 {
                     writer.WriteStringValue(MaskStrings.Default);

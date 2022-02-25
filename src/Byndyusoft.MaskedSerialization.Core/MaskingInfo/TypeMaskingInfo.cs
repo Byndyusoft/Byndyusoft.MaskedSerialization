@@ -9,38 +9,38 @@
     {
         private readonly IReadOnlyDictionary<PropertyInfo, PropertyMaskingInfo> _propertyMaskingInfos;
 
-        private TypeMaskingInfo(Type type, PropertyMaskingInfo[] properties, bool isMaskable)
+        private TypeMaskingInfo(Type type, PropertyMaskingInfo[] properties, bool hasMaskedProperties)
         {
             Type = type;
-            IsMaskable = isMaskable;
+            HasMaskedProperties = hasMaskedProperties;
             _propertyMaskingInfos = properties.ToDictionary(i => i.PropertyInfo);
         }
 
         public Type Type { get; }
 
-        public bool IsMaskable { get; }
+        public bool HasMaskedProperties { get; }
 
-        public static TypeMaskingInfo ForMaskable(Type type, PropertyMaskingInfo[] properties)
+        public static TypeMaskingInfo ForTypesWithMaskedProperties(Type type, PropertyMaskingInfo[] properties)
         {
             return new TypeMaskingInfo(type, properties, true);
         }
 
-        public static TypeMaskingInfo ForNonMaskable(Type type)
+        public static TypeMaskingInfo ForTypesWithoutMaskedProperties(Type type)
         {
             return new TypeMaskingInfo(type, Array.Empty<PropertyMaskingInfo>(), false);
         }
 
         public IEnumerable<PropertyMaskingInfo> GetAllProperties()
         {
-            if (IsMaskable == false)
-                throw new InvalidOperationException("Type is not maskable. Properties are not accessible");
+            if (HasMaskedProperties == false)
+                throw new InvalidOperationException("Type does not have masked properties. Properties are not accessible");
 
             return _propertyMaskingInfos.Values;
         }
 
         public bool IsMemberMasked(MemberInfo memberInfo)
         {
-            if (IsMaskable && memberInfo is PropertyInfo propertyInfo)
+            if (HasMaskedProperties && memberInfo is PropertyInfo propertyInfo)
             {
                 if (_propertyMaskingInfos.TryGetValue(propertyInfo, out var propertyMaskingInfo))
                     return propertyMaskingInfo.IsMasked;

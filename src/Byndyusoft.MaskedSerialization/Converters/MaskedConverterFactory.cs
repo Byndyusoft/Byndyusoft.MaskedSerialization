@@ -14,7 +14,7 @@
         public override bool CanConvert(Type typeToConvert)
         {
             var typeMaskingInfo = TypeMaskingInfoHelper.Get(typeToConvert);
-            return typeMaskingInfo.IsMaskable;
+            return typeMaskingInfo.HasMaskedProperties;
         }
 
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)

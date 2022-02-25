@@ -19,14 +19,14 @@
 
         private static TypeMaskingInfo GetTypeMaskingInfo(Type type)
         {
-            var isTypeMaskable = IsTypeMaskable(type);
-            if (isTypeMaskable == false)
-                return TypeMaskingInfo.ForNonMaskable(type);
-
             var propertyInfos = GetGetablePropertiesRecursively(type).ToArray();
             var cacheEntryProperties = propertyInfos.Select(GetPropertyMaskingInfo).ToArray();
 
-            return TypeMaskingInfo.ForMaskable(type, cacheEntryProperties);
+            var hasMaskedProperties = cacheEntryProperties.Any(i => i.IsMasked);
+            if (hasMaskedProperties)
+                return TypeMaskingInfo.ForTypesWithMaskedProperties(type, cacheEntryProperties);
+
+            return TypeMaskingInfo.ForTypesWithoutMaskedProperties(type);
         }
 
         private static PropertyMaskingInfo GetPropertyMaskingInfo(PropertyInfo propertyInfo)
@@ -34,12 +34,6 @@
             var maskedAttribute = propertyInfo.GetCustomAttribute<MaskedAttribute>();
             var isMasked = maskedAttribute != null;
             return new PropertyMaskingInfo(propertyInfo, isMasked);
-        }
-
-        private static bool IsTypeMaskable(Type type)
-        {
-            var cacheEntryClass = type.GetCustomAttribute<MaskableAttribute>();
-            return cacheEntryClass != null;
         }
 
         private static IEnumerable<PropertyInfo> GetGetablePropertiesRecursively(Type type)
