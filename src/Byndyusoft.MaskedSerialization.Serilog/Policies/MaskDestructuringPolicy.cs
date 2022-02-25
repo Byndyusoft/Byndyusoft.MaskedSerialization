@@ -2,34 +2,45 @@
 {
     using System.Linq;
     using System.Reflection;
-    using Annotations;
-    using Extensions;
+    using Annotations.Consts;
+    using Core.MaskingInfo;
     using global::Serilog.Core;
     using global::Serilog.Debugging;
     using global::Serilog.Events;
 
     public class MaskDestructuringPolicy : IDestructuringPolicy
     {
-        public bool TryDestructure(object value, ILogEventPropertyValueFactory propertyValueFactory, out LogEventPropertyValue result)
+        public bool TryDestructure(object value, ILogEventPropertyValueFactory propertyValueFactory, out LogEventPropertyValue? result)
         {
             var type = value.GetType();
-            var propertyInfos = type.GetGetablePropertiesRecursively();
-            var logEventProperties =
-                propertyInfos.Select(propertyInfo => CreateLogEventProperty(value, propertyInfo, propertyValueFactory));
+
+            var typeMaskingInfo = TypeMaskingInfoHelper.Get(type);
+            if (typeMaskingInfo.IsMaskable == false)
+            {
+                result = null;
+                return false;
+            }
+
+            var logEventProperties = typeMaskingInfo
+                .GetAllProperties()
+                .Select(propertyMaskingInfo => CreateLogEventProperty(value, propertyMaskingInfo, propertyValueFactory));
 
             result = new StructureValue(logEventProperties, type.Name);
             return true;
         }
 
-        private LogEventProperty CreateLogEventProperty(object value, PropertyInfo propertyInfo,
+        private LogEventProperty CreateLogEventProperty(
+            object value,
+            PropertyMaskingInfo propertyMaskingInfo,
             ILogEventPropertyValueFactory propertyValueFactory)
         {
-            var maskedAttribute = propertyInfo.GetCustomAttribute<MaskedAttribute>();
-            if (maskedAttribute != null)
-                return new LogEventProperty(propertyInfo.Name, propertyValueFactory.CreatePropertyValue(MaskStrings.Default));
+            if (propertyMaskingInfo.IsMasked)
+                return new LogEventProperty(propertyMaskingInfo.PropertyInfo.Name,
+                    propertyValueFactory.CreatePropertyValue(MaskStrings.Default));
 
-            var propertyValue = SafeGetPropertyValue(value, propertyInfo);
-            return new LogEventProperty(propertyInfo.Name, propertyValueFactory.CreatePropertyValue(propertyValue, true));
+            var propertyValue = SafeGetPropertyValue(value, propertyMaskingInfo.PropertyInfo);
+            return new LogEventProperty(propertyMaskingInfo.PropertyInfo.Name,
+                propertyValueFactory.CreatePropertyValue(propertyValue, true));
         }
 
         private object SafeGetPropertyValue(object value, PropertyInfo propertyInfo)

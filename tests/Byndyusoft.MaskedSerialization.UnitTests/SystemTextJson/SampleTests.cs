@@ -22,7 +22,7 @@
         [Test]
         public void Test()
         {
-            var testDto = _fixture.Create<TestDto>();
+            var testDto = _fixture.Create<TestUserDto>();
             var serialized = JsonSerializer.Serialize(testDto, _jsonSerializerOptions);
 
             Console.WriteLine(serialized);

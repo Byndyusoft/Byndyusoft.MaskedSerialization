@@ -6,12 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Byndyusoft.MaskedSerialization.Annotations\Byndyusoft.MaskedSerialization.Annotations.csproj" />
-    <ProjectReference Include="..\Byndyusoft.MaskedSerialization.Core\Byndyusoft.MaskedSerialization.Core.csproj" />
   </ItemGroup>
 
 </Project>

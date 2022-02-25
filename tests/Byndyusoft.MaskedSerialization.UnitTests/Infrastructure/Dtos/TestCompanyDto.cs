@@ -1,8 +1,9 @@
 ﻿namespace Byndyusoft.MaskedSerialization.UnitTests.Infrastructure.Dtos
 {
-    using Annotations;
+    using Annotations.Attributes;
 
-    public class TestInnerDto
+    [Maskable]
+    public class TestCompanyDto
     {
         public long Id { get; set; }
 

@@ -1,17 +1,12 @@
 ﻿namespace Byndyusoft.MaskedSerialization.UnitTests.Infrastructure.Dtos
 {
-    using Annotations;
+    using Annotations.Attributes;
 
-    public class TestDto
+    public class TestNonMaskableDto
     {
         public string Note { get; set; } = default!;
 
         [Masked]
         public string Password { get; set; } = default!;
-
-        public TestInnerDto Inner { get; set; } = default!;
-
-        [Masked]
-        public TestInnerDto? SecretInner { get; set; } = default!;
     }
 }
