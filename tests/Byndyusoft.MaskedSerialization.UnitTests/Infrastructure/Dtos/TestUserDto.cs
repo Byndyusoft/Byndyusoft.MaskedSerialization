@@ -3,16 +3,16 @@
     using Annotations.Attributes;
 
     [Maskable]
-    public class TestDto
+    public class TestUserDto
     {
         public string Note { get; set; } = default!;
 
         [Masked]
         public string Password { get; set; } = default!;
 
-        public TestInnerDto Inner { get; set; } = default!;
+        public TestCompanyDto Company { get; set; } = default!;
 
         [Masked]
-        public TestInnerDto? SecretInner { get; set; } = default!;
+        public TestCompanyDto? SecretCompany { get; set; } = default!;
     }
 }

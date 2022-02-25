@@ -3,7 +3,7 @@
     using Annotations.Attributes;
 
     [Maskable]
-    public class TestInnerDto
+    public class TestCompanyDto
     {
         public long Id { get; set; }
 

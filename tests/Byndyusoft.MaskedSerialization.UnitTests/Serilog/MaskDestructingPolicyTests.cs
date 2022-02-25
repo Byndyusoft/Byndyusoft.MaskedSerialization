@@ -30,18 +30,18 @@
             using (TestCorrelator.CreateContext())
             {
                 // Arrange
-                var dto = _fixture.Create<TestDto>();
-                var template = "Deconstructed Dto {@TestDto}";
+                var dto = _fixture.Create<TestUserDto>();
+                var template = "Deconstructed Dto {@TestUserDto}";
 
                 // Act
                 _logger.Information(template, dto);
 
                 // Assert
-                AssertSingleLoggedString(template, "Deconstructed Dto TestDto {" +
+                AssertSingleLoggedString(template, "Deconstructed Dto TestUserDto {" +
                                                    $" Note: \"{dto.Note}\"," +
                                                    " Password: \"*\"," +
-                                                   $" Inner: TestInnerDto {{ Id: {dto.Inner.Id}, Inn: \"*\" }}," +
-                                                   " SecretInner: \"*\"" +
+                                                   $" Company: TestCompanyDto {{ Id: {dto.Company.Id}, Inn: \"*\" }}," +
+                                                   " SecretCompany: \"*\"" +
                                                    " }");
             }
         }
@@ -62,6 +62,26 @@
                 AssertSingleLoggedString(template, "Deconstructed Dto TestNonMaskableDto {" +
                                                    $" Note: \"{dto.Note}\"," +
                                                    $" Password: \"{dto.Password}\"" +
+                                                   " }");
+            }
+        }
+
+        [Test]
+        public void Log_TestNonMaskableUserDto_LoggedDestructuredCompanyIsMasked()
+        {
+            using (TestCorrelator.CreateContext())
+            {
+                // Arrange
+                var dto = _fixture.Create<TestNonMaskableUserDto>();
+                var template = "Deconstructed Dto {@TestNonMaskableUserDto}";
+
+                // Act
+                _logger.Information(template, dto);
+
+                // Assert
+                AssertSingleLoggedString(template, "Deconstructed Dto TestNonMaskableUserDto {" +
+                                                   $" Note: \"{dto.Note}\"," +
+                                                   $" Company: TestCompanyDto {{ Id: {dto.Company.Id}, Inn: \"*\" }}" +
                                                    " }");
             }
         }
