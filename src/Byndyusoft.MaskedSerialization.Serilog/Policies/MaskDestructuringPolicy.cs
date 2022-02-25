@@ -20,17 +20,15 @@
         {
             var type = value.GetType();
 
-            var maskableAttribute = type.GetCustomAttribute<MaskableAttribute>();
-            if (maskableAttribute == null)
+            var cacheEntry = Cache.GetOrAdd(type, GetCacheEntry);
+            if (cacheEntry.IsMaskableType == false)
             {
                 result = null;
                 return false;
             }
 
-            var cacheEntry = Cache.GetOrAdd(type, GetCacheEntry);
-
             var logEventProperties =
-                cacheEntry.Properties.Select(cacheEntryItem => CreateLogEventProperty(value, cacheEntryItem, propertyValueFactory));
+                cacheEntry.Properties.Select(cacheEntryProperty => CreateLogEventProperty(value, cacheEntryProperty, propertyValueFactory));
 
             result = new StructureValue(logEventProperties, type.Name);
             return true;
@@ -40,7 +38,8 @@
         {
             var propertyInfos = type.GetGetablePropertiesRecursively().ToArray();
             var cacheEntryProperties = propertyInfos.Select(GetCacheEntryProperty).ToArray();
-            return new CacheEntry(cacheEntryProperties);
+
+            return new CacheEntry(cacheEntryProperties, IsTypeMaskable(type));
         }
 
         private CacheEntryProperty GetCacheEntryProperty(PropertyInfo propertyInfo)
@@ -50,14 +49,24 @@
             return new CacheEntryProperty(propertyInfo, isMasked);
         }
 
-        private LogEventProperty CreateLogEventProperty(object value, CacheEntryProperty cacheEntryProperty,
+        private bool IsTypeMaskable(Type type)
+        {
+            var cacheEntryClass = type.GetCustomAttribute<MaskableAttribute>();
+            return cacheEntryClass != null;
+        }
+
+        private LogEventProperty CreateLogEventProperty(
+            object value,
+            CacheEntryProperty cacheEntryProperty,
             ILogEventPropertyValueFactory propertyValueFactory)
         {
             if (cacheEntryProperty.IsMasked)
-                return new LogEventProperty(cacheEntryProperty.PropertyInfo.Name, propertyValueFactory.CreatePropertyValue(MaskStrings.Default));
+                return new LogEventProperty(cacheEntryProperty.PropertyInfo.Name,
+                    propertyValueFactory.CreatePropertyValue(MaskStrings.Default));
 
             var propertyValue = SafeGetPropertyValue(value, cacheEntryProperty.PropertyInfo);
-            return new LogEventProperty(cacheEntryProperty.PropertyInfo.Name, propertyValueFactory.CreatePropertyValue(propertyValue, true));
+            return new LogEventProperty(cacheEntryProperty.PropertyInfo.Name,
+                propertyValueFactory.CreatePropertyValue(propertyValue, true));
         }
 
         private object SafeGetPropertyValue(object value, PropertyInfo propertyInfo)

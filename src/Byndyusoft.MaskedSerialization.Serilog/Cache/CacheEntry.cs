@@ -1,14 +1,15 @@
 ﻿namespace Byndyusoft.MaskedSerialization.Serilog.Cache
 {
-    using Policies;
-
     public class CacheEntry
     {
-        public CacheEntry(CacheEntryProperty[] properties)
+        public CacheEntry(CacheEntryProperty[] properties, bool isMaskableType)
         {
             Properties = properties;
+            IsMaskableType = isMaskableType;
         }
 
         public CacheEntryProperty[] Properties { get; }
+
+        public bool IsMaskableType { get; }
     }
 }
