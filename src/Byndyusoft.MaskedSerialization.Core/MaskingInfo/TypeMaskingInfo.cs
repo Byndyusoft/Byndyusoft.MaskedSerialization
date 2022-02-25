@@ -16,6 +16,10 @@
             _propertyMaskingInfos = properties.ToDictionary(i => i.PropertyInfo);
         }
 
+        public Type Type { get; }
+
+        public bool IsMaskable { get; }
+
         public static TypeMaskingInfo ForMaskable(Type type, PropertyMaskingInfo[] properties)
         {
             return new TypeMaskingInfo(type, properties, true);
@@ -25,8 +29,6 @@
         {
             return new TypeMaskingInfo(type, Array.Empty<PropertyMaskingInfo>(), false);
         }
-
-        public Type Type { get; }
 
         public IEnumerable<PropertyMaskingInfo> GetAllProperties()
         {
@@ -46,7 +48,5 @@
 
             return false;
         }
-
-        public bool IsMaskable { get; }
     }
 }
