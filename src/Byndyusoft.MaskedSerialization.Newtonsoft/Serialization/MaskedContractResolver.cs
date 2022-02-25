@@ -1,7 +1,7 @@
 ﻿namespace Byndyusoft.MaskedSerialization.Newtonsoft.Serialization
 {
     using System.Reflection;
-    using Annotations.Attributes;
+    using Core.MaskingInfo;
     using global::Newtonsoft.Json;
     using global::Newtonsoft.Json.Serialization;
 
@@ -13,12 +13,15 @@
         {
             var property = base.CreateProperty(member, memberSerialization);
 
-            var maskableAttribute = member.DeclaringType?.GetCustomAttribute<MaskableAttribute>();
-            if (maskableAttribute == null)
+            var reflectedType = member.ReflectedType;
+            if (reflectedType == null)
                 return property;
 
-            var maskLoggingAttribute = member.GetCustomAttribute<MaskedAttribute>();
-            if (maskLoggingAttribute != null)
+            var typeMaskingInfo = TypeMaskingInfoHelper.Get(reflectedType);
+            if (typeMaskingInfo.IsMaskable == false)
+                return property;
+
+            if (typeMaskingInfo.IsMemberMasked(member))
                 property.Converter = MaskConverter;
 
             return property;
