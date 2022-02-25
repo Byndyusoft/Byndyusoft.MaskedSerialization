@@ -29,7 +29,7 @@ jobs:
         run: dotnet test
         
       - name: publish
-        uses: rohith/publish-nuget@v2
+        uses: alirezanet/publish-nuget@v3.0.0
         with:
           PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization.Annotations/Byndyusoft.MaskedSerialization.Annotations.csproj
           VERSION_FILE_PATH: Directory.Build.props
@@ -39,7 +39,7 @@ jobs:
           INCLUDE_SYMBOLS: true
         
       - name: publish
-        uses: rohith/publish-nuget@v2
+        uses: alirezanet/publish-nuget@v3.0.0
         with:
           PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization.Core/Byndyusoft.MaskedSerialization.Core.csproj
           VERSION_FILE_PATH: Directory.Build.props
@@ -49,7 +49,7 @@ jobs:
           INCLUDE_SYMBOLS: true
         
       - name: publish
-        uses: rohith/publish-nuget@v2
+        uses: alirezanet/publish-nuget@v3.0.0
         with:
           PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization.Newtonsoft/Byndyusoft.MaskedSerialization.Newtonsoft.csproj
           VERSION_FILE_PATH: Directory.Build.props
@@ -59,7 +59,7 @@ jobs:
           INCLUDE_SYMBOLS: true
         
       - name: publish
-        uses: rohith/publish-nuget@v2
+        uses: alirezanet/publish-nuget@v3.0.0
         with:
           PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization.Serilog/Byndyusoft.MaskedSerialization.Serilog.csproj
           VERSION_FILE_PATH: Directory.Build.props
@@ -69,7 +69,7 @@ jobs:
           INCLUDE_SYMBOLS: true
         
       - name: publish
-        uses: rohith/publish-nuget@v2
+        uses: alirezanet/publish-nuget@v3.0.0
         with:
           PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization/Byndyusoft.MaskedSerialization.csproj
           VERSION_FILE_PATH: Directory.Build.props
