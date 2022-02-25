@@ -5,7 +5,7 @@
     using System.Reflection;
     using System.Text.Json;
     using System.Text.Json.Serialization;
-    
+
     public abstract class JsonConverterPropertyWriter<T>
     {
         public abstract void Write(JsonConverter jsonConverter, Utf8JsonWriter writer, T value, JsonSerializerOptions options);
