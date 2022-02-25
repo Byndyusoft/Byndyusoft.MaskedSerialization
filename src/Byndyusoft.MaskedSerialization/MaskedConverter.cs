@@ -1,12 +1,10 @@
 ﻿namespace Byndyusoft.MaskedSerialization
 {
     using System;
-    using System.Reflection;
     using System.Text.Json;
     using System.Text.Json.Serialization;
-    using Annotations;
-    using Annotations.Attributes;
     using Annotations.Consts;
+    using Core.MaskingInfo;
 
     public class MaskedConverter<T> : JsonConverter<T>
         where T : class
@@ -20,12 +18,15 @@
         {
             writer.WriteStartObject();
 
-            var propertyInfos = value.GetType().GetGetablePropertiesRecursively();
-            foreach (var propertyInfo in propertyInfos)
+            var typeMaskingInfo = TypeMaskingInfoHelper.Get(value.GetType());
+            if (typeMaskingInfo.IsMaskable == false)
+                throw new InvalidOperationException("This converter is used only for maskable types");
+
+            foreach (var propertyMaskingInfo in typeMaskingInfo.GetAllProperties())
             {
+                var propertyInfo = propertyMaskingInfo.PropertyInfo;
                 writer.WritePropertyName(propertyInfo.Name);
-                var maskedAttribute = propertyInfo.GetCustomAttribute<MaskedAttribute>();
-                if (maskedAttribute != null)
+                if (propertyMaskingInfo.IsMasked)
                 {
                     writer.WriteStringValue(MaskStrings.Default);
                 }

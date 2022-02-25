@@ -3,12 +3,14 @@
     using System;
     using System.Text.Json;
     using System.Text.Json.Serialization;
+    using Core.MaskingInfo;
 
-    public class JsonFactory : JsonConverterFactory
+    public class MaskedConverterFactory : JsonConverterFactory
     {
         public override bool CanConvert(Type typeToConvert)
         {
-            return typeToConvert.IsClass && typeToConvert.IsPrimitive == false && typeToConvert != typeof(string);
+            var typeMaskingInfo = TypeMaskingInfoHelper.Get(typeToConvert);
+            return typeMaskingInfo.IsMaskable;
         }
 
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)

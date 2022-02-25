@@ -7,7 +7,7 @@
         public static JsonSerializerOptions GetJsonSerializerOptions()
         {
             var jsonSerializerOptions = new JsonSerializerOptions();
-            jsonSerializerOptions.Converters.Add(new JsonFactory());
+            jsonSerializerOptions.Converters.Add(new MaskedConverterFactory());
 
             return jsonSerializerOptions;
         }
