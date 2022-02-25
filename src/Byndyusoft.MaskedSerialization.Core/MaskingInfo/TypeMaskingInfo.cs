@@ -9,20 +9,36 @@
     {
         private readonly IReadOnlyDictionary<PropertyInfo, PropertyMaskingInfo> _propertyMaskingInfos;
 
-        public TypeMaskingInfo(Type type, PropertyMaskingInfo[] properties, bool isMaskable)
+        private TypeMaskingInfo(Type type, PropertyMaskingInfo[] properties, bool isMaskable)
         {
             Type = type;
             IsMaskable = isMaskable;
             _propertyMaskingInfos = properties.ToDictionary(i => i.PropertyInfo);
         }
 
+        public static TypeMaskingInfo ForMaskable(Type type, PropertyMaskingInfo[] properties)
+        {
+            return new TypeMaskingInfo(type, properties, true);
+        }
+
+        public static TypeMaskingInfo ForNonMaskable(Type type)
+        {
+            return new TypeMaskingInfo(type, Array.Empty<PropertyMaskingInfo>(), false);
+        }
+
         public Type Type { get; }
 
-        public IEnumerable<PropertyMaskingInfo> GetAllProperties() => _propertyMaskingInfos.Values;
+        public IEnumerable<PropertyMaskingInfo> GetAllProperties()
+        {
+            if (IsMaskable == false)
+                throw new InvalidOperationException("Type is not maskable. Properties are not accessible");
+
+            return _propertyMaskingInfos.Values;
+        }
 
         public bool IsMemberMasked(MemberInfo memberInfo)
         {
-            if (memberInfo is PropertyInfo propertyInfo)
+            if (IsMaskable && memberInfo is PropertyInfo propertyInfo)
             {
                 if (_propertyMaskingInfos.TryGetValue(propertyInfo, out var propertyMaskingInfo))
                     return propertyMaskingInfo.IsMasked;
