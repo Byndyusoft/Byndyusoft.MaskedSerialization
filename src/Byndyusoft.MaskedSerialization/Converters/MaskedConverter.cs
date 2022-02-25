@@ -33,12 +33,9 @@
                 else
                 {
                     var jsonConverter = options.GetConverter(propertyInfo.PropertyType);
-                    var methodInfo = jsonConverter.GetType().GetMethod("Write");
-                    if (methodInfo == null)
-                        throw new InvalidOperationException($"Write method is not found in {jsonConverter.GetType().Name}");
 
-                    var propertyValue = propertyInfo.GetValue(value);
-                    methodInfo.Invoke(jsonConverter, new[] { writer, propertyValue, options });
+                    var jsonConverterPropertyWriter = JsonConverterPropertyWriterFactory<T>.Create(propertyInfo);
+                    jsonConverterPropertyWriter.Write(jsonConverter, writer, value, options);
                 }
             }
 
