@@ -1,4 +1,4 @@
-﻿namespace Byndyusoft.MaskedSerialization
+﻿namespace Byndyusoft.MaskedSerialization.Converters
 {
     using System;
     using System.Text.Json;
