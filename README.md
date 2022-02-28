@@ -120,29 +120,41 @@ You can setup logger configuration to use destructure masking policy:
 
 ```csharp
   var loggerConfiguration = new LoggerConfiguration().WithMaskingPolicy().WriteTo.Console();
-  _logger = loggerConfiguration.CreateLogger();
 ```
 
 Here is example of simple usage:
 
 ```csharp
-  var dto = new CompanyDto
-                {
-                    Name = "Mega Big Company",
-                    SecretOwner = "Navalov",
-                    WhiteIncome = new IncomeDto
-                                      {
-                                          Description = "White",
-                                          SumInDollars = 1000000
-                                      },
-                    GreyIncome = new IncomeDto
-                                     {
-                                         Description = "Black",
-                                         SumInDollars = 1000000000
-                                     }
-                };
+public class Service
+{
+  private readonly ILogger<Service> _logger;
 
-  _logger.Information("Used company {@CompanyDto}", dto);
+  public Service(ILogger<Service> logger)
+  {
+    _logger = logger;
+  }
+
+  public void LogCompany()
+  {
+    var dto = new CompanyDto
+                  {
+                      Name = "Mega Big Company",
+                      SecretOwner = "Navalov",
+                      WhiteIncome = new IncomeDto
+                                        {
+                                            Description = "White",
+                                            SumInDollars = 1000000
+                                        },
+                      GreyIncome = new IncomeDto
+                                       {
+                                           Description = "Black",
+                                           SumInDollars = 1000000000
+                                       }
+                  };
+    
+    _logger.LogInformation("Used company {@CompanyDto}", dto);
+  }
+}
 ```
 
 The output in console will be:
