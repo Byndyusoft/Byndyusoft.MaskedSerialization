@@ -1,6 +1,7 @@
 ﻿namespace Byndyusoft.MaskedSerialization.Newtonsoft.Serialization
 {
     using System;
+    using Annotations.Consts;
     using global::Newtonsoft.Json;
 
     public class MaskConverter : JsonConverter
@@ -11,7 +12,7 @@
 
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
-            writer.WriteValue("*");
+            writer.WriteValue(MaskStrings.Default);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)

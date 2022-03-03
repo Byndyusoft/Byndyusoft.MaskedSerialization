@@ -1,9 +1,9 @@
-﻿namespace Byndyusoft.MaskedSerialization.UnitTests.Newtonsoft.Helpers
+﻿namespace Byndyusoft.MaskedSerialization.UnitTests.SystemTextJson.Helpers
 {
     using System;
     using AutoFixture;
     using Infrastructure.Dtos;
-    using MaskedSerialization.Newtonsoft.Helpers;
+    using MaskedSerialization.Helpers;
     using NUnit.Framework;
 
     [TestFixture]
@@ -20,7 +20,7 @@
         [Test]
         public void SerializeWithMasking_HasMaskedPropertiesWithInner_SerializedWithMasks()
         {
-            // Arrange
+            // Assert
             var dto = _fixture.Create<TestUserDto>();
             var expected =
                 $"{{\"Note\":\"{dto.Note}\",\"Password\":\"*\",\"Company\":{{\"Id\":{dto.Company.Id},\"Inn\":\"*\"}},\"SecretCompany\":\"*\"}}";

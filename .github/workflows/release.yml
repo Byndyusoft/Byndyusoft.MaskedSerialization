@@ -4,6 +4,7 @@ on:
     types: [published]
     branches:
       - master # Default release branch
+      - 'feature/**'
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -11,7 +12,7 @@ jobs:
       DOTNET_NOLOGO: true
     steps:
       - name: checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         
       - name: install dotnet
         uses: actions/setup-dotnet@v1
@@ -28,9 +29,49 @@ jobs:
         run: dotnet test
         
       - name: publish
-        uses: rohith/publish-nuget@v2
+        uses: alirezanet/publish-nuget@v3.0.0
+        with:
+          PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization.Annotations/Byndyusoft.MaskedSerialization.Annotations.csproj
+          VERSION_FILE_PATH: Directory.Build.props
+          VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
+          TAG_COMMIT: false
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          INCLUDE_SYMBOLS: true
+        
+      - name: publish
+        uses: alirezanet/publish-nuget@v3.0.0
+        with:
+          PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization.Core/Byndyusoft.MaskedSerialization.Core.csproj
+          VERSION_FILE_PATH: Directory.Build.props
+          VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
+          TAG_COMMIT: false
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          INCLUDE_SYMBOLS: true
+        
+      - name: publish
+        uses: alirezanet/publish-nuget@v3.0.0
         with:
           PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization.Newtonsoft/Byndyusoft.MaskedSerialization.Newtonsoft.csproj
+          VERSION_FILE_PATH: Directory.Build.props
+          VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
+          TAG_COMMIT: false
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          INCLUDE_SYMBOLS: true
+        
+      - name: publish
+        uses: alirezanet/publish-nuget@v3.0.0
+        with:
+          PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization.Serilog/Byndyusoft.MaskedSerialization.Serilog.csproj
+          VERSION_FILE_PATH: Directory.Build.props
+          VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
+          TAG_COMMIT: false
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          INCLUDE_SYMBOLS: true
+        
+      - name: publish
+        uses: alirezanet/publish-nuget@v3.0.0
+        with:
+          PROJECT_FILE_PATH: src/Byndyusoft.MaskedSerialization/Byndyusoft.MaskedSerialization.csproj
           VERSION_FILE_PATH: Directory.Build.props
           VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
           TAG_COMMIT: false
