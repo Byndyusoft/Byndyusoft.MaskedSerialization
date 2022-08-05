@@ -6,12 +6,11 @@
 
     public class JsonConverterPropertyWriterFactory<T>
     {
-        private static readonly ConcurrentDictionary<PropertyInfo, JsonConverterPropertyWriter<T>> Writers =
-            new ConcurrentDictionary<PropertyInfo, JsonConverterPropertyWriter<T>>();
+        private static readonly ConcurrentDictionary<PropertyInfo, JsonConverterPropertyWriter<T>> Writers = new();
 
         public static JsonConverterPropertyWriter<T> Create(PropertyInfo propertyInfo)
         {
-            var jsonConverterPropertyWriter = Writers.GetOrAdd(propertyInfo, types => CreateWriter(propertyInfo));
+            var jsonConverterPropertyWriter = Writers.GetOrAdd(propertyInfo, CreateWriter);
             return jsonConverterPropertyWriter;
         }
 

@@ -8,8 +8,7 @@
 
     public class MaskedConverterFactory : JsonConverterFactory
     {
-        private static readonly ConcurrentDictionary<Type, JsonConverter>
-            MaskedConverters = new ConcurrentDictionary<Type, JsonConverter>();
+        private static readonly ConcurrentDictionary<Type, JsonConverter> MaskedConverters = new();
 
         public override bool CanConvert(Type typeToConvert)
         {
