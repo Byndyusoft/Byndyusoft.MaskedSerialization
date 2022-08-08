@@ -10,7 +10,7 @@
 
         public static void SetupOptionsForMaskedSerialization(JsonSerializerOptions options)
         {
-            options.Converters.Add(MaskedConverterFactory);
+            options.TypeInfoResolver = new MaskedJsonTypeInfoResolver();
         }
 
         public static JsonSerializerOptions GetOptionsForMaskedSerialization()
