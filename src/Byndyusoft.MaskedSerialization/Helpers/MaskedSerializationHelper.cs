@@ -1,16 +1,18 @@
 ﻿namespace Byndyusoft.MaskedSerialization.Helpers
 {
     using System.Text.Json;
-    using System.Text.Json.Serialization;
+    using System.Text.Json.Serialization.Metadata;
+    using Annotations.Attributes;
     using Converters;
 
     public static class MaskedSerializationHelper
     {
-        public static JsonConverter MaskedConverterFactory { get; } = new MaskedConverterFactory();
 
         public static void SetupOptionsForMaskedSerialization(JsonSerializerOptions options)
         {
-            options.Converters.Add(MaskedConverterFactory);
+            var resolver =
+                (DefaultJsonTypeInfoResolver)(options.TypeInfoResolver ??= new DefaultJsonTypeInfoResolver());
+            resolver.Modifiers.Add(DetectMaskedMemberAttribute);
         }
 
         public static JsonSerializerOptions GetOptionsForMaskedSerialization()
@@ -27,6 +29,21 @@
             var serialized = JsonSerializer.Serialize(value, settings);
 
             return serialized;
+        }
+        
+        private static void DetectMaskedMemberAttribute(JsonTypeInfo typeInfo)
+        {
+            if (typeInfo.Kind != JsonTypeInfoKind.Object)
+                return;
+
+            foreach (var propertyInfo in typeInfo.Properties)
+            {
+                if (propertyInfo.AttributeProvider is { } provider &&
+                    provider.IsDefined(typeof(MaskedAttribute), inherit: true))
+                {
+                    propertyInfo.CustomConverter = new MaskedConverterFactory();
+                }
+            }
         }
     }
 }
