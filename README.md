@@ -165,7 +165,7 @@ The output in console will be:
 
 # Contributing
 
-To contribute, you will need to setup your local environment, see [prerequisites](#prerequisites). For the contribution and workflow guide, see [package development lifecycle](#package-development-lifecycle).
+To contribute, you will need to setup your local environment, see [prerequisites](#prerequisites). For a contribution and workflow guide, see [package development lifecycle](#package-development-lifecycle).
 
 A detailed overview on how to contribute can be found in the [contributing guide](CONTRIBUTING.md).
 
@@ -181,7 +181,7 @@ Make sure you have installed all of the following prerequisites on your developm
 - Implement package logic in `src`
 - Add or adapt unit-tests in `tests`
 - Add or change the documentation as needed
-- Open pull request in the correct branch. Target the project's `master` branch
+- Open pull request for a correct branch. Target the project's `master` branch
 
 # Maintainers
 
