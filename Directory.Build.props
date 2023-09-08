@@ -1,11 +1,16 @@
 <Project>
   <PropertyGroup>
-    <Version>2.1.1</Version>
+    <Version>2.1.2</Version>
     <Authors>Byndyusoft</Authors>
     <PackageTags>Byndyusoft;MaskedSerialization;SensitiveData;MaskedLogging;Serilog</PackageTags>
     <RepositoryUrl>https://github.com/Byndyusoft/Byndyusoft.MaskedSerialization</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <LangVersion>9</LangVersion>
     <nullable>enable</nullable>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png" Pack="true" PackagePath="icon.png" />
+  </ItemGroup>
 </Project>
