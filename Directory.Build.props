@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <Authors>Byndyusoft</Authors>
     <PackageTags>Byndyusoft;MaskedSerialization;SensitiveData;MaskedLogging;Serilog</PackageTags>
     <RepositoryUrl>https://github.com/Byndyusoft/Byndyusoft.MaskedSerialization</RepositoryUrl>

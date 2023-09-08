@@ -140,3 +140,6 @@ ModelManifest.xml
 
 **/.vs/config/applicationhost.config
 .vs/**
+
+#Rider generated files
+.idea
