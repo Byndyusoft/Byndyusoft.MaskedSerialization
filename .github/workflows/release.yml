@@ -4,7 +4,6 @@ on:
     types: [published]
     branches:
       - master # Default release branch
-      - 'feature/**'
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -17,7 +16,7 @@ jobs:
       - name: install dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: 6.0.x
           
       - name: install packages
         run: dotnet restore

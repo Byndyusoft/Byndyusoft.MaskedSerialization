@@ -1,6 +1,6 @@
 # Byndyusoft.MaskedSerialization [![Nuget](https://img.shields.io/nuget/v/Byndyusoft.MaskedSerialization.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization/) [![Downloads](https://img.shields.io/nuget/dt/Byndyusoft.MaskedSerialization.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization/)
 
-Tool for serialization by System.Text.Json package with masking sensitive data
+A tool to mask sensitive data during serialization with the System.Text.Json package
 
 ## Installing
 
@@ -10,7 +10,7 @@ dotnet add package Byndyusoft.MaskedSerialization
 
 ## Usage
 
-System.Text.Json is used to serialize data with masking sensitive data. Use *[Masked]* attribute to define properties to be masked. Example:
+If you use System.Text.Json to serialize data, use *[Masked]* attribute to mark properties that should be masked. Example:
 
 ```csharp
   public class CompanyDto
@@ -20,7 +20,7 @@ System.Text.Json is used to serialize data with masking sensitive data. Use *[Ma
       [Masked]
       public string SecretOwner { get; set; } = default!;
 
-      public Income WhiteIncome { get; set; } = default!;
+      public IncomeDto WhiteIncome { get; set; } = default!;
 
       [Masked]
       public IncomeDto GreyIncome { get; set; } = default!;
@@ -34,7 +34,7 @@ System.Text.Json is used to serialize data with masking sensitive data. Use *[Ma
       public long SumInDollars { get; set; }
   }
 ```
-Values of properties *Password* and *SecretInner* of class *TestDto* will be masked with value **"\*"**. Here is example of simple usage:
+Values of properties *SecretOwner* and *GreyIncome* of class *CompanyDto* will be masked with value **"\*"**. Here is an example of simple usage:
 
 ```csharp
   var dto = new CompanyDto
@@ -80,11 +80,11 @@ You can setup serializer options to enable masking. Another usage example:
 
 ## Not implemented System.Text.Json annotations
 
-If a type has at least one property with the [Masked] attribute, then annotation attributes will be ignored during serialization objects of this type. For example, those are *[JsonIgnore]*, *[JsonPropertyName(...)]*, *[JsonInclude]*, *[JsonConverter(...)]* etc.
+If a type has at least one property with the *[Masked]* attribute, then annotation attributes will be ignored during serialization of objects of this type. For example, those are *[JsonIgnore]*, *[JsonPropertyName(...)]*, *[JsonInclude]*, *[JsonConverter(...)]* etc.
 
 # Byndyusoft.MaskedSerialization.Newtonsoft [![Nuget](https://img.shields.io/nuget/v/Byndyusoft.MaskedSerialization.Newtonsoft.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization.Newtonsoft/) [![Downloads](https://img.shields.io/nuget/dt/Byndyusoft.MaskedSerialization.Newtonsoft.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization.Newtonsoft/)
 
-Tool for serialization by Newtonsoft.Json with masking sensitive data
+A tool to mask sensitive data during serialization with Newtonsoft.Json
 
 ## Installing
 
@@ -94,7 +94,7 @@ dotnet add package Byndyusoft.MaskedSerialization.Newtonsoft
 
 ## Usage
 
-Newtonsoft Json is used to serialize data with masking sensitive data. Use *[Masked]* attribute to define properties to be masked. Usage example:
+If you use Newtonsoft.Json to serialize data, use *[Masked]* attribute to mark properties that should be masked. Usage example:
 
 ```csharp
   var serialized = MaskedSerializationHelper.SerializeWithMasking(dto);
@@ -106,7 +106,7 @@ Newtonsoft Json is used to serialize data with masking sensitive data. Use *[Mas
 
 # Byndyusoft.MaskedSerialization.Serilog [![Nuget](https://img.shields.io/nuget/v/Byndyusoft.MaskedSerialization.Serilog.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization.Serilog/) [![Downloads](https://img.shields.io/nuget/dt/Byndyusoft.MaskedSerialization.Serilog.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization.Serilog/)
 
-Tool for logging by Serilog with masking sensitive destructured data
+A tool to mask sensitive destructured data in logging with Serilog
 
 ## Installing
 
@@ -122,7 +122,7 @@ You can setup logger configuration to use destructure masking policy:
   var loggerConfiguration = new LoggerConfiguration().WithMaskingPolicy().WriteTo.Console();
 ```
 
-Here is example of simple usage:
+Here is an example of simple usage:
 
 ```csharp
 public class Service
@@ -157,11 +157,31 @@ public class Service
 }
 ```
 
-The output in console will be:
+The output in the console will be:
 
 ```
   [10:47:31 INF] Used company {"Name": "Mega Big Company", "SecretOwner": "*", "WhiteIncome": {"Description": "White", "SumInDollars": "*", "$type": "IncomeDto"}, "GreyIncome": "*", "$type": "CompanyDto"}
 ```
+
+# Contributing
+
+To contribute, you will need to setup your local environment, see [prerequisites](#prerequisites). For a contribution and workflow guide, see [package development lifecycle](#package-development-lifecycle).
+
+A detailed overview on how to contribute can be found in the [contributing guide](CONTRIBUTING.md).
+
+## Prerequisites
+
+Make sure you have installed all of the following prerequisites on your development machine:
+
+- Git - [Download & Install Git](https://git-scm.com/downloads). OSX and Linux machines typically have this already installed.
+- .NET Core (version 6.0 or higher) - [Download & Install .NET Core](https://dotnet.microsoft.com/en-us/download/dotnet/6.0).
+
+## Package development lifecycle
+
+- Implement package logic in `src`
+- Add or adapt unit-tests in `tests`
+- Add or change the documentation as needed
+- Open pull request for a correct branch. Target the project's `master` branch
 
 # Maintainers
 
