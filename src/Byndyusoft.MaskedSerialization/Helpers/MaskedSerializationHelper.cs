@@ -1,5 +1,6 @@
 ﻿namespace Byndyusoft.MaskedSerialization.Helpers
 {
+    using System;
     using System.Text.Json;
     using System.Text.Json.Serialization.Metadata;
     using Annotations.Attributes;
@@ -10,9 +11,11 @@
     {
         public static void SetupOptionsForMaskedSerialization(JsonSerializerOptions options)
         {
-            var resolver =
-                (DefaultJsonTypeInfoResolver)(options.TypeInfoResolver ??= new DefaultJsonTypeInfoResolver());
-            resolver.Modifiers.Add(DetectMaskedMemberAttribute);
+            var resolver = options.TypeInfoResolver ??= new DefaultJsonTypeInfoResolver();
+            if (resolver is DefaultJsonTypeInfoResolver defaultJsonTypeInfoResolver)
+                defaultJsonTypeInfoResolver.Modifiers.Add(DetectMaskedMemberAttribute);
+            else
+                throw new InvalidOperationException($"Expected resolver of type {typeof(DefaultJsonTypeInfoResolver)}");
         }
 
         private static void DetectMaskedMemberAttribute(JsonTypeInfo typeInfo)
