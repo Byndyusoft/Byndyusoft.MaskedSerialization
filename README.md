@@ -78,10 +78,6 @@ You can setup serializer options to enable masking. Another usage example:
   var serialized = JsonSerializer.Serialize(dto, options);
 ```
 
-## Not implemented System.Text.Json annotations
-
-If a type has at least one property with the *[Masked]* attribute, then annotation attributes will be ignored during serialization of objects of this type. For example, those are *[JsonIgnore]*, *[JsonPropertyName(...)]*, *[JsonInclude]*, *[JsonConverter(...)]* etc.
-
 # Byndyusoft.MaskedSerialization.Newtonsoft [![Nuget](https://img.shields.io/nuget/v/Byndyusoft.MaskedSerialization.Newtonsoft.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization.Newtonsoft/) [![Downloads](https://img.shields.io/nuget/dt/Byndyusoft.MaskedSerialization.Newtonsoft.svg)](https://www.nuget.org/packages/Byndyusoft.MaskedSerialization.Newtonsoft/)
 
 A tool to mask sensitive data during serialization with Newtonsoft.Json

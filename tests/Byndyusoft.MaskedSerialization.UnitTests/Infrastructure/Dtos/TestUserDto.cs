@@ -13,5 +13,10 @@
 
         [Masked]
         public TestCompanyDto? SecretCompany { get; set; } = default!;
+
+        [Masked]
+        [global::Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
+        public string Ignored { get; set; } = default!;
     }
 }
