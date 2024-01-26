@@ -41,7 +41,8 @@
                                                    $" Note: \"{dto.Note}\"," +
                                                    " Password: \"*\"," +
                                                    $" Company: TestCompanyDto {{ Id: {dto.Company.Id}, Inn: \"*\" }}," +
-                                                   " SecretCompany: \"*\"" +
+                                                   " SecretCompany: \"*\"," +
+                                                   " Ignored: \"*\"" +
                                                    " }");
             }
         }
